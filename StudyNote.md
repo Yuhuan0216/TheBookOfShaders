@@ -24,14 +24,12 @@
 - 代碼的撰寫: 要求有通用規則, 達到依像素的不同位置輸出不同的結果.
 
 ### - `Hello World`
-- 渲染一個`色塊`來打聲招呼吧!
+- 起手來個`色塊`渲染吧!
 
 ```glsl
 #ifdef GL_ES
 precision mediump float;
 #endif
-
-uniform float u_time;
 
 void main(){
     gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
@@ -51,4 +49,55 @@ void main(){
         - 範例中`vec4`準確到單精度浮點, 因此要賦值`float`, 請記得加上小數點.
     
 ### - `Uniforms`
+- 因為顯示卡架構, 並行線程的輸入參數為`統一值(uniform)`且屬於`唯讀變數`.
+- 在設定完 `shader` 精度後, 開始 `unifom 變數` 的定義.
+
+```glsl
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+// 設定 unifom變數
+uniform vec2 u_resolution;  // 解析度
+uniform vec2 u_mouse;       // 像素點位置
+uniform float u_time;       // 執行秒數
+```
+
+- 試試將`紅色通道`隨 `執行時間 uniform` 呈現 `sin波函數` 變化！
+
+```glsl
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform float u_time;
+
+void main() {
+	gl_FragColor = vec4(abs(sin(u_time)), 0.0, 0.0, 1.0);
+}
+```
+
+<!-- TODO:補上函數說明 -->
+- `GLSL` 支援的`GPU加速(硬體加速)`函數運算:
+    - [sin()](https://thebookofshaders.com/glossary/?search=sin) - 
+    - [cos()](https://thebookofshaders.com/glossary/?search=cos) - 
+    - [tan()](https://thebookofshaders.com/glossary/?search=tan) - 
+    - [asin()](https://thebookofshaders.com/glossary/?search=asin) - 
+    - [acos()](https://thebookofshaders.com/glossary/?search=acos) - 
+    - [atan()](https://thebookofshaders.com/glossary/?search=atan) - 
+    - [pow()](https://thebookofshaders.com/glossary/?search=pow) - 
+    - [exp()](https://thebookofshaders.com/glossary/?search=exp) - 
+    - [log()](https://thebookofshaders.com/glossary/?search=log) - 
+    - [sqrt()](https://thebookofshaders.com/glossary/?search=sqrt) - 
+    - [abs()](https://thebookofshaders.com/glossary/?search=abs) - 
+    - [sign()](https://thebookofshaders.com/glossary/?search=sign) - 
+    - [floor()](https://thebookofshaders.com/glossary/?search=floor) - 
+    - [ceil()](https://thebookofshaders.com/glossary/?search=ceil) - 
+    - [fract()](https://thebookofshaders.com/glossary/?search=fract) - 
+    - [mod()](https://thebookofshaders.com/glossary/?search=mod) - 
+    - [min()](https://thebookofshaders.com/glossary/?search=min) - 
+    - [max()](https://thebookofshaders.com/glossary/?search=max) - 
+    - [clamp()](https://thebookofshaders.com/glossary/?search=clamp) - 
+
+### - `gl_FragCoord`
 
