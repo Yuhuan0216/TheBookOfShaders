@@ -101,4 +101,32 @@ void main() {
     - [clamp()](https://thebookofshaders.com/glossary/?search=clamp) - 
 
 ### - `gl_FragCoord`
+- `gl_FragCoord(vec4)` 是預設輸入, 呼應預設輸出 `gl_FragColor(vec4)`.
+- `gl_FragCoord` 記錄線程的當前`像素座標/片段座標`.
+
+```glsl
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 u_resolution;  // 解析度
+uniform vec2 u_mouse;       // 像素點位置
+uniform float u_time;       // 執行秒數
+
+void main() {
+	vec2 st = gl_FragCoord.xy / u_resolution;   // 將x,y座標 標準化(normolize).
+	gl_FragColor = vec4(st.x ,st.y, 0.0, 1.0);  // 讓紅綠隨解析度所對應的比例分佈.
+}
+```
+
+### - 在瀏覽器運行 shader
+- 
+
+### - 在框架運行 shader
+#### < Three.js >
+- 
+#### < Processing >
+- 
+#### < OpenFrameworks >
+- 
 
